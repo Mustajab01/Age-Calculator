@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>Age Calculator</title>
+</head>
+<body>
+    <div class="credits">
+        <p>Made by: Mustajab Ali</p>
+    </div>
+    <div class="container">
+        <div id="main" class="main">
+            <div class="heading">
+                <h1 id="heading">Age Calculator</h1>
+            </div>
+            <div class="inputs">
+                <label class="label">Start Date:</label>
+                <div class="start input-div">
+                    <input type="number" id="start-day" class="date num-input" max="31" min="1"  placeholder="1">
+                    <input type="number" id="start-month" class="month num-input" max="12" min="1" placeholder="1">
+                    <input type="number" id="start-year" class="year num-input" max="2022" min="1950" placeholder="2001">
+                </div>
+                <label class="label">End Date:</label>
+                <div class="end input-div">
+                    <input type="number" id="end-day" class="date num-input" max="31" min="1" placeholder="1">
+                    <input type="number" id="end-month" class="month num-input" max="12" min="1" placeholder="1">
+                    <input type="number" id="end-year" class="year num-input" max="2022" min="1950" placeholder="2023">
+                </div>
+            </div>
+            <div class="buttons">
+                <button onclick="calculate('')" class="btn calculate-btn">Calculate</button>
+                <button onclick="reset('')" class="btn reset-btn">Reset</button>
+            </div>
+            <div class="answer">
+                <p>You are:</p>
+                <div class="final-answer">
+                    <p><span id="answer-year">00</span> Years, <span id="answer-month">00</span> Months, <span id="answer-day">00</span> Days Old</p>
+                </div>    
+            </div>
+        </div>
+    </div>    
+
+    <script src="app.js"></script>
+</body>
+</html>
