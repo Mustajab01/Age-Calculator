@@ -18,6 +18,26 @@ function calculate() {
         return;
     }
 
+    // Check for leap years
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+
+    // Adjust February days for leap years
+    let daysInFebStart = isLeapYear(sy) ? 29 : 28;
+    let daysInFebEnd = isLeapYear(ey) ? 29 : 28;
+
+    // Validate February days
+    if (sm === 2 && sd > daysInFebStart) {
+        alert("Invalid start date for February. Please enter a valid date.");
+        return;
+    }
+
+    if (em === 2 && ed > daysInFebEnd) {
+        alert("Invalid end date for February. Please enter a valid date.");
+        return;
+    }
+
     // Calculate age
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
@@ -30,7 +50,7 @@ function calculate() {
 
     if (ed < sd) {
         em--;
-        ed += 30; // Assuming each month has 30 days for simplicity
+        ed += daysInFebEnd; // Use the correct number of days in February
     }
 
     if (em < sm) {
@@ -45,16 +65,4 @@ function calculate() {
     document.querySelector("#answer-day").textContent = days < 10 ? "0" + days : days;
     document.querySelector("#answer-month").textContent = months < 10 ? "0" + months : months;
     document.querySelector("#answer-year").textContent = years < 10 ? "0" + years : years;
-}
-
-function reset() {
-    document.getElementById("start-day").value = "";
-    document.getElementById("start-month").value = "";
-    document.getElementById("start-year").value = "";
-    document.getElementById("end-day").value = "";
-    document.getElementById("end-month").value = "";
-    document.getElementById("end-year").value = "";
-    document.querySelector("#answer-day").textContent = "00";
-    document.querySelector("#answer-month").textContent = "00";
-    document.querySelector("#answer-year").textContent = "00";
 }
