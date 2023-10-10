@@ -1,62 +1,60 @@
-let sd = document.getElementById("start-day");
-let sm = document.getElementById("start-month");
-let sy = document.getElementById("start-year");
+function calculate() {
+    let sd = parseInt(document.getElementById("start-day").value);
+    let sm = parseInt(document.getElementById("start-month").value);
+    let sy = parseInt(document.getElementById("start-year").value);
+    let ed = parseInt(document.getElementById("end-day").value);
+    let em = parseInt(document.getElementById("end-month").value);
+    let ey = parseInt(document.getElementById("end-year").value);
 
-let ed = document.getElementById("end-day");
-let em = document.getElementById("end-month");
-let ey = document.getElementById("end-year");
-
-// let months_31 = Array(1,3,5,7,8,10,12);
-// let months_30 = Array(2,4,6,9,11); 
-
-// function leapYear(year){
-//   return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
-// }
-function calculate(){
-    let fd,fm,fy;
-
-    fy = (ey.value) - (sy.value);
-    fm = (em.value) - (sm.value);
-    fd = (ed.value) - (sd.value);
-
-
-    // //FOR FINDING TOTAL DAYS: (CALCULATION MISTAKE. NOT INCLUDING LEAP DAYS)
-    // let remaining_days=0,extra_days=0,total_days=0,remaining_months=0,remaining_years=0, yearly_days = 365;
-    // remaining_years = fy;
-    // remaining_months = 12 - sm.value; 
-
-    // remaining_days = (30 - sd.value) + (remaining_months*30);
-    // extra_days = ((em.value-1) *30) + (ed.value -0);  
-    // total_days = (remaining_days + extra_days + 5);
-
-    // total_days += (remaining_years-1) * 365;
-
-    // document.getElementById("heading").textContent = total_days;
-
-    if(fd < 0){
-        fm--;
-        fd = 30 + fd;
+    // Input validation
+    if (isNaN(sd) || isNaN(sm) || isNaN(sy) || isNaN(ed) || isNaN(em) || isNaN(ey)) {
+        alert("Please enter valid numbers for day, month, and year.");
+        return;
     }
 
-    if (fm < 0){
-        fy--;
-        fm = 12 + fm;
-    } 
+    // Date validation
+    if (sm < 1 || sm > 12 || em < 1 || em > 12 || sd < 1 || sd > 31 || ed < 1 || ed > 31) {
+        alert("Invalid date input. Please enter valid dates.");
+        return;
+    }
 
-    document.querySelector("#answer-day").textContent = fd;
-    document.querySelector("#answer-month").textContent = fm;
-    document.querySelector("#answer-year").textContent = fy;
+    // Calculate age
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based
+    let currentDay = currentDate.getDate();
+
+    let years = currentYear - sy;
+    let months = currentMonth - sm;
+    let days = currentDay - sd;
+
+    if (ed < sd) {
+        em--;
+        ed += 30; // Assuming each month has 30 days for simplicity
+    }
+
+    if (em < sm) {
+        ey--;
+        em += 12;
+    }
+
+    years = ey - sy;
+    months = em - sm;
+    days = ed - sd;
+
+    document.querySelector("#answer-day").textContent = days < 10 ? "0" + days : days;
+    document.querySelector("#answer-month").textContent = months < 10 ? "0" + months : months;
+    document.querySelector("#answer-year").textContent = years < 10 ? "0" + years : years;
 }
 
-function reset(){
-    document.querySelector("#answer-day").textContent = 00;
-    document.querySelector("#answer-month").textContent = 00;
-    document.querySelector("#answer-year").textContent = 00;
-
-    sd.placeholder = 1;
-    sm.placeholder = 1;
-    sy.placeholder = 2001;
-    ed.placeholder = 1;
-    em.placeholder = 1;
-    ey.placeholder = 2023;
+function reset() {
+    document.getElementById("start-day").value = "";
+    document.getElementById("start-month").value = "";
+    document.getElementById("start-year").value = "";
+    document.getElementById("end-day").value = "";
+    document.getElementById("end-month").value = "";
+    document.getElementById("end-year").value = "";
+    document.querySelector("#answer-day").textContent = "00";
+    document.querySelector("#answer-month").textContent = "00";
+    document.querySelector("#answer-year").textContent = "00";
 }
