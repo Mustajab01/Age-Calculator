@@ -13,6 +13,17 @@ header {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+header a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: bolder;
+}
+
+header a:hover {
+    color: #2980b9;
+}
+
 .container {
     display: flex;
     justify-content: center;
